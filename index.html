@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melvin Shaju — AI & ML Engineer · Adelaide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;
+  --surface:#0e1117;
+  --surface2:#141820;
+  --border:rgba(139,92,246,0.12);
+  --border2:rgba(139,92,246,0.28);
+  --accent:#8b5cf6;
+  --accent2:#a78bfa;
+  --teal:#2dd4bf;
+  --teal-dim:rgba(45,212,191,0.10);
+  --accent-dim:rgba(139,92,246,0.10);
+  --text:#eef0f6;
+  --muted:#5a6280;
+  --mono:'Space Mono',monospace;
+  --sans:'Outfit',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 3.5rem;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(7,9,15,0.92)}
+.nav-logo{font-family:var(--mono);font-size:.82rem;color:var(--accent2);text-decoration:none;letter-spacing:.04em}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent2)}
+.nav-pill{font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:.07em;background:var(--teal-dim);padding:.28rem .8rem;border-radius:20px;border:1px solid rgba(45,212,191,0.25)}
+
+/* SECTIONS */
+section{padding:7rem 3.5rem;max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.8rem}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:3rem;line-height:1.1}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:6rem;position:relative;overflow:hidden}
+.orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.09) 0%,transparent 70%);right:-80px;top:40%;transform:translateY(-50%);pointer-events:none}
+.orb2{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,0.07) 0%,transparent 70%);left:-40px;bottom:100px;pointer-events:none}
+.hero-greeting{font-family:var(--mono);font-size:.8rem;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.25rem;opacity:0;animation:fadeUp .5s .15s forwards}
+.hero-name{font-size:clamp(3.5rem,9vw,7rem);font-weight:900;line-height:.95;letter-spacing:-.04em;margin-bottom:1.2rem;opacity:0;animation:fadeUp .6s .3s forwards}
+.hero-name .accent{color:var(--accent2)}
+.hero-name .dot{color:var(--teal)}
+.hero-title{font-size:clamp(1rem,2vw,1.25rem);color:var(--muted);font-weight:500;margin-bottom:.6rem;opacity:0;animation:fadeUp .6s .44s forwards}
+.hero-sub{font-size:.98rem;color:var(--muted);max-width:540px;margin-bottom:2.75rem;font-weight:300;line-height:1.8;opacity:0;animation:fadeUp .6s .56s forwards}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .68s forwards}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.82rem 1.85rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-decoration:none;border-radius:8px;transition:all .2s;cursor:pointer;font-weight:700}
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#07090f;border:none}
+.btn-teal:hover{background:#5eead4;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-outline:hover{border-color:var(--accent2);color:var(--accent2);transform:translateY(-2px)}
+.hero-loc{position:absolute;bottom:3rem;right:3.5rem;font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.1em;opacity:0;animation:fadeIn 1s 1.3s forwards}
+
+/* QUICK CARDS */
+#quick{border-top:1px solid var(--border);padding-top:3.5rem;padding-bottom:3.5rem}
+.quick-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:14px;overflow:hidden}
+.quick-box{background:var(--surface);padding:1.75rem;text-align:center;transition:background .2s}
+.quick-box:hover{background:var(--surface2)}
+.quick-num{font-size:2.2rem;font-weight:900;line-height:1;margin-bottom:.4rem;font-family:var(--mono);color:var(--accent2)}
+.quick-num.teal{color:var(--teal)}
+.quick-lbl{font-size:.8rem;color:var(--muted);font-family:var(--mono);letter-spacing:.04em}
+.quick-sub{font-size:.7rem;color:var(--muted);opacity:.65;margin-top:.2rem}
+
+/* ABOUT */
+#about{border-top:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:4.5rem;align-items:start}
+.about-text p{color:var(--muted);margin-bottom:1.2rem;font-size:.98rem;line-height:1.8}
+.about-text p strong{color:var(--text);font-weight:600}
+.about-text p .teal{color:var(--teal)}
+.about-text p .acc{color:var(--accent2)}
+.collab-box{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:1.75rem}
+.collab-title{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.1rem}
+.collab-item{display:flex;align-items:flex-start;gap:.85rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.collab-item:last-child{border-bottom:none}
+.collab-icon{width:34px;height:34px;border-radius:8px;background:var(--accent-dim);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.collab-text p{font-size:.87rem;font-weight:600;margin-bottom:.1rem}
+.collab-text span{font-size:.78rem;color:var(--muted)}
+
+/* EXPERIENCE */
+#experience{border-top:1px solid var(--border)}
+.timeline{position:relative;padding-left:.25rem}
+.timeline::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,var(--accent),rgba(139,92,246,0.08))}
+.tl-item{position:relative;padding-left:2.4rem;margin-bottom:3.5rem}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-5.5px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 10px rgba(139,92,246,.5)}
+.tl-dot.teal{background:var(--teal);box-shadow:0 0 10px rgba(45,212,191,.4)}
+.tl-date{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.1em;margin-bottom:.4rem}
+.tl-role{font-size:1.1rem;font-weight:700;margin-bottom:.15rem}
+.tl-company{font-size:.88rem;color:var(--muted);margin-bottom:.9rem}
+.tl-desc{list-style:none;padding:0}
+.tl-desc li{color:var(--muted);font-size:.9rem;line-height:1.7;padding:.28rem 0 .28rem 1.3rem;position:relative}
+.tl-desc li::before{content:'→';position:absolute;left:0;color:var(--accent2);font-family:var(--mono);font-size:.8rem}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.tag{font-family:var(--mono);font-size:.65rem;color:var(--accent2);background:var(--accent-dim);padding:.26rem .68rem;border-radius:4px;letter-spacing:.04em;border:1px solid rgba(139,92,246,.18)}
+.tag.teal{color:var(--teal);background:var(--teal-dim);border-color:rgba(45,212,191,.2)}
+
+/* EDUCATION */
+#education{border-top:1px solid var(--border)}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem}
+.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.edu-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.edu-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.edu-card:hover::after,.edu-card.active::after{transform:scaleX(1)}
+.edu-card.active{border-color:rgba(139,92,246,.35)}
+.edu-icon{font-size:1.7rem;margin-bottom:1rem;display:block}
+.edu-degree{font-size:1rem;font-weight:800;margin-bottom:.25rem}
+.edu-school{font-size:.88rem;color:var(--muted);margin-bottom:.4rem}
+.edu-year{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.08em;margin-bottom:.9rem}
+.edu-desc{font-size:.86rem;color:var(--muted);line-height:1.65}
+.edu-badge{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);font-size:.63rem;color:var(--teal);background:var(--teal-dim);padding:.24rem .65rem;border-radius:4px;margin-top:.8rem;border:1px solid rgba(45,212,191,.2)}
+
+/* PROJECTS */
+#projects{border-top:1px solid var(--border)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.75rem}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.proj-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,92,246,.04),transparent);opacity:0;transition:opacity .3s}
+.proj-card:hover{border-color:rgba(139,92,246,.38);transform:translateY(-5px)}
+.proj-card:hover::before{opacity:1}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
+.proj-num{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.1em}
+.proj-badges{display:flex;gap:.4rem;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:.58rem;padding:.18rem .55rem;border-radius:4px;letter-spacing:.04em}
+.badge.ai{background:rgba(139,92,246,.14);color:var(--accent2);border:1px solid rgba(139,92,246,.22)}
+.badge.cv{background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.2)}
+.badge.hw{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.badge.open{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.18)}
+.proj-title{font-size:1.05rem;font-weight:800;margin-bottom:.6rem;line-height:1.3}
+.proj-desc{color:var(--muted);font-size:.88rem;line-height:1.68;margin-bottom:1.4rem;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.25rem}
+.proj-metrics{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.metric{font-family:var(--mono);font-size:.64rem;color:var(--teal);background:var(--teal-dim);padding:.24rem .65rem;border-radius:4px;border:1px solid rgba(45,212,191,.2)}
+.proj-link{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;transition:color .2s;margin-top:auto}
+.proj-link:hover{color:var(--accent2)}
+
+/* SKILLS */
+#skills{border-top:1px solid var(--border)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.4rem}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.65rem;transition:border-color .2s}
+.skill-group:hover{border-color:var(--border2)}
+.sg-title{font-family:var(--mono);font-size:.68rem;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+.pills{display:flex;flex-wrap:wrap;gap:.38rem}
+.pill{font-family:var(--mono);font-size:.68rem;color:var(--text);background:var(--surface2);padding:.3rem .75rem;border-radius:6px;border:1px solid var(--border);transition:all .2s}
+.pill:hover{border-color:var(--accent2);color:var(--accent2)}
+
+/* LANGUAGES */
+#languages{border-top:1px solid var(--border)}
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border2);border-radius:14px;overflow:hidden}
+.lang-card{background:var(--surface);padding:1.5rem;text-align:center;transition:background .2s}
+.lang-card:hover{background:var(--surface2)}
+.lang-flag{font-size:1.8rem;margin-bottom:.6rem;display:block}
+.lang-name{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+.lang-level{font-family:var(--mono);font-size:.68rem;color:var(--teal);letter-spacing:.08em}
+
+/* CONTACT */
+#contact{border-top:1px solid var(--border)}
+.contact-wrap{max-width:680px}
+.contact-desc{color:var(--muted);font-size:.98rem;margin-bottom:2.5rem;line-height:1.8}
+.contact-desc strong{color:var(--text)}
+.contact-links{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin-bottom:2.5rem}
+.cr{display:flex;justify-content:space-between;align-items:center;background:var(--surface);padding:1.15rem 1.5rem;text-decoration:none;transition:background .2s}
+.cr:hover{background:var(--surface2)}
+.cr-lbl{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;flex:0 0 85px}
+.cr-val{font-size:.93rem;color:var(--text);flex:1}
+.cr-arr{color:var(--accent2);font-size:1rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.25rem 3.5rem;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.05em}
+.ft-back{font-family:var(--mono);font-size:.68rem;color:var(--muted);text-decoration:none;letter-spacing:.06em;transition:color .2s}
+.ft-back:hover{color:var(--accent2)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s,transform .65s}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+@media(max-width:860px){
+  nav{padding:1rem 1.5rem}.nav-links{gap:1rem}
+  section{padding:5rem 1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem}
+  .quick-row{grid-template-columns:1fr 1fr}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+  .hero-loc{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">melvin.ai</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#strengths">Strengths</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-pill">✦ Seeking Graduate Programs 2027</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+  <p class="hero-greeting">// AI Engineer · Robotics · Healthcare · Automation · Software — Adelaide, Australia</p>
+  <h1 class="hero-name">Melvin<br><span class="accent">Shaju<span class="dot">.</span></span></h1>
+  <p class="hero-title">Mechatronics Engineer → AI & ML · Healthcare AI · Robotics · AI Software · Intelligent Automation</p>
+  <p class="hero-sub">
+    I sit at the intersection of <strong>physical engineering and artificial intelligence</strong> — Mechatronics degree meets AI/ML Master's. Passionate about building <strong>intelligent systems for healthcare, robotics, and automation</strong> that work in the real world, not just on paper. Seeking <strong>internships now</strong> and <strong>graduate programs from 2027</strong>.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">See my work →</a>
+    <a href="#contact" class="btn btn-teal">Let's collaborate</a>
+    <a href="mailto:melvinshaju1314@gmail.com" class="btn btn-outline">Get in touch</a>
+  </div>
+  <p style="margin-top:1.5rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.06em;opacity:0;animation:fadeIn 1s .9s forwards">"Mechatronics taught me how machines work. AI is teaching me how to make them think. Dreams show me why it matters."</p>
+  <p class="hero-loc">📍 55 Lionel Ave, Blair Athol, Adelaide SA 5084</p>
+</section>
+
+<!-- QUICK STATS -->
+<section id="quick">
+  <div class="quick-row reveal">
+    <div class="quick-box">
+      <p class="quick-num">AI+</p>
+      <p class="quick-lbl">Mechatronics</p>
+      <p class="quick-sub">Rare combination</p>
+    </div>
+    <div class="quick-box">
+      <p class="quick-num teal">🏥</p>
+      <p class="quick-lbl">Healthcare AI</p>
+      <p class="quick-sub">Key focus area</p>
+    </div>
+    <div class="quick-box">
+      <p class="quick-num">🤖</p>
+      <p class="quick-lbl">Robotics & Auto</p>
+      <p class="quick-sub">Core interest</p>
+    </div>
+    <div class="quick-box">
+      <p class="quick-num teal">2027</p>
+      <p class="quick-lbl">Graduate Ready</p>
+      <p class="quick-sub">Post Master's 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label reveal">// 01 — about me</p>
+  <h2 class="reveal">Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Hi! I'm <strong>Melvin Shaju</strong>, based in <strong>Adelaide, Australia</strong> — currently completing my Master's in <span class="acc">AI & Machine Learning</span> at Adelaide University, with a background in <span class="teal">Mechatronics Engineering</span> (Anna University).</p>
+      <p>My background gives me a <strong>rare edge</strong> — I understand both the <span class="teal">physical world of sensors, motors, and control systems</span> and the <span class="acc">intelligence layer of neural networks, computer vision, and ML models</span>. Most AI engineers can't read a circuit. Most hardware engineers can't train a model. I can do both.</p>
+      <p>I'm focused on applying this combination to <strong>Healthcare AI</strong> (smart patient monitoring, medical imaging, hospital automation), <strong>Robotics</strong> (autonomous systems, perception, motion planning), <strong>Intelligent Automation</strong>, and <strong>AI Software</strong> — building intelligent apps, LLM-powered tools, and computer vision products that bring AI to real users and businesses.</p>
+      <p>I also have real <strong>hands-on care experience</strong> at Altaira — which means I understand the human side of healthcare technology, not just the technical side. I believe the best healthcare AI is built by people who truly understand patients.</p>
+      <p>And above everything — <strong style="color:var(--text)">Jesus is the foundation of everything I do</strong>. My faith gives me the strength to dream big, the courage to keep going when things are hard, and the heart to genuinely care for others. Every project, every goal, every step forward — it's all purposeful. ✝️</p>
+    </div>
+    <div class="reveal d1">
+      <div class="collab-box">
+        <p class="collab-title">// Open to</p>
+        <div class="collab-item">
+          <div class="collab-icon">🎯</div>
+          <div class="collab-text">
+            <p>AI/ML Internships — Now</p>
+            <span>Healthcare AI · Robotics · Automation</span>
+          </div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-icon">🎓</div>
+          <div class="collab-text">
+            <p>Graduate Programs — 2027</p>
+            <span>After completing Master's in 2026</span>
+          </div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-icon">🤖</div>
+          <div class="collab-text">
+            <p>Robotics & Automation Projects</p>
+            <span>AI + hardware collaborations</span>
+          </div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-icon">🏥</div>
+          <div class="collab-text">
+            <p>Healthcare AI</p>
+            <span>Smart systems that help real patients</span>
+          </div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-icon">💻</div>
+          <div class="collab-text">
+            <p>AI Software Projects</p>
+            <span>LLMs, apps, computer vision tools</span>
+          </div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-icon">🌐</div>
+          <div class="collab-text">
+            <p>Networking & Collaboration</p>
+            <span>Connect, build, and grow together</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section id="strengths" style="border-top:1px solid var(--border)">
+  <p class="section-label reveal">// 02 — strengths</p>
+  <h2 class="reveal">What drives me</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border2);border:1px solid var(--border2);border-radius:14px;overflow:hidden" class="reveal">
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">🎤</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Confident Communicator</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">I speak clearly and confidently — whether presenting ideas, working in a team, or meeting new people. I believe good communication is as important as technical skill.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">📚</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Self-Learner</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">I don't wait to be taught — I go and find it myself. From W3Schools to Kaggle competitions to personal projects, I'm always picking up new skills on my own time.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">⚡</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Smart Decision Maker</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">I think before I act. I weigh options, consider consequences, and make decisions with confidence — a skill I've developed balancing studies, work, and projects simultaneously.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">🌙</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">A Dreamer</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">I dream big — and then I work to make it real. Moving to Australia, studying AI/ML, competing internationally — these started as dreams. I believe the biggest breakthroughs begin with someone who dared to imagine them.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">🤝</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Team Player</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">From care work to university projects, I thrive in teams. I listen, I contribute, and I lift others up. I know that the best things are always built together.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">🔥</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Resilient & Adaptable</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">Moving from India to Australia, switching from Mechatronics to AI, working part-time while studying full-time — I adapt fast and keep going. Challenges don't stop me, they shape me.</p>
+    </div>
+
+    <div style="background:var(--surface);padding:1.75rem;transition:background .2s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+      <p style="font-size:1.6rem;margin-bottom:.85rem">✝️</p>
+      <p style="font-weight:800;font-size:.95rem;margin-bottom:.4rem">Faith-Driven</p>
+      <p style="font-size:.83rem;color:var(--muted);line-height:1.65">Jesus is the centre of my life. My faith shapes how I treat people, how I approach challenges, and why I care so deeply about using technology to help others. It's not just what I believe — it's how I live.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">// 02 — experience</p>
+  <h2 class="reveal">What I've done</h2>
+  <div class="timeline reveal">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-date">Feb 2026 — Present</p>
+      <p class="tl-role">Member — Computer Science Club</p>
+      <p class="tl-company">Adelaide University Computer Science Club · Adelaide, SA</p>
+      <ul class="tl-desc">
+        <li>Actively networking with fellow students, researchers, and tech professionals in Adelaide.</li>
+        <li>Engaging in tech events, hackathons, and knowledge-sharing sessions.</li>
+      </ul>
+      <div class="tl-tags"><span class="tag teal">Networking</span><span class="tag teal">Tech Community</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot teal"></div>
+      <p class="tl-date">Oct 2025 — Present · Part-time</p>
+      <p class="tl-role">Personal Care Assistant</p>
+      <p class="tl-company">Altaira · Adelaide, South Australia · On-site</p>
+      <ul class="tl-desc">
+        <li>Providing compassionate aged care support — assisting with daily activities, health, and dignity.</li>
+        <li>Developing strong communication, patience, and people-first thinking skills.</li>
+      </ul>
+      <div class="tl-tags"><span class="tag">Elder Care</span><span class="tag">Communication</span><span class="tag">Compassionate Care</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot teal"></div>
+      <p class="tl-date">Feb 2025 — Present · Part-time</p>
+      <p class="tl-role">Kitchen Assistant & Customer Service</p>
+      <p class="tl-company">Muratti Cakes & Gateaux · Prospect, South Australia · On-site</p>
+      <ul class="tl-desc">
+        <li>Supporting food preparation, maintaining kitchen hygiene and assisting the team during busy hours.</li>
+        <li>Delivering friendly customer service — building communication and teamwork skills.</li>
+      </ul>
+      <div class="tl-tags"><span class="tag">Customer Service</span><span class="tag">Teamwork</span></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-date">Kochi, India</p>
+      <p class="tl-role">Python Programming Trainee</p>
+      <p class="tl-company">CB YTech · Kochi, India · Intensive Training</p>
+      <ul class="tl-desc">
+        <li>Completed intensive hands-on Python programming training covering fundamentals and OOP.</li>
+        <li>Worked on mini-projects in data analysis, automation, and file handling.</li>
+        <li>Learned NumPy, Pandas, and Matplotlib for data manipulation and visualization.</li>
+      </ul>
+      <div class="tl-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">OOP</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label reveal">// 03 — education</p>
+  <h2 class="reveal">Academic background</h2>
+  <div class="edu-grid reveal">
+
+    <div class="edu-card active">
+      <span class="edu-icon">🤖</span>
+      <p class="edu-degree">Master of AI & Machine Learning</p>
+      <p class="edu-school">Adelaide University · Adelaide, Australia</p>
+      <p class="edu-year">2025 — 2026 · Currently studying</p>
+      <p class="edu-desc">Studying Neural Networks, Computer Vision, Deep Learning, NLP, and Big Data Systems. Applying knowledge through real research projects including computer vision challenges and LLM evaluation studies.</p>
+      <span class="edu-badge">🎓 Current</span>
+    </div>
+
+    <div class="edu-card">
+      <span class="edu-icon">⚙️</span>
+      <p class="edu-degree">BE Mechatronics Engineering</p>
+      <p class="edu-school">Anna University · India</p>
+      <p class="edu-year">2017 — 2021 · Undergraduate</p>
+      <p class="edu-desc">Strong foundation in electronics, control systems, robotics, and software integration. Final year project: Arduino-based automated hospital bed-to-chair conversion system — combining sensors, motors, and control logic.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">// 04 — projects</p>
+  <h2 class="reveal">Things I've built</h2>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <p class="proj-num">01 — AI / Research</p>
+        <div class="proj-badges"><span class="badge ai">AI</span><span class="badge open">Adelaide University</span></div>
+      </div>
+      <h3 class="proj-title">LLM Trustworthiness Evaluation — Phishing Susceptibility</h3>
+      <p class="proj-desc">Evaluated the trustworthiness of large language models in the context of phishing-susceptible users. Investigated how LLMs behave when exposed to socially engineered prompts — a critical cybersecurity and AI ethics challenge.</p>
+      <div class="proj-metrics">
+        <span class="metric">LLM Safety</span><span class="metric">Cybersecurity</span><span class="metric">AI Ethics</span>
+      </div>
+      <div class="proj-tags">
+        <span class="tag">Python</span><span class="tag">Jupyter Notebook</span><span class="tag">NLP</span>
+      </div>
+      <a href="https://github.com/melmiracle7388/assignment2_a1947213_shaju" class="proj-link" target="_blank">⌥ View on GitHub →</a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <p class="proj-num">02 — Computer Vision</p>
+        <div class="proj-badges"><span class="badge cv">Competition</span></div>
+      </div>
+      <h3 class="proj-title">Lettuce Dry Weight Prediction — Wageningen University</h3>
+      <p class="proj-desc">Participated in an international computer vision competition by Wageningen University & Research on precision agriculture. Built a regression model to predict lettuce dry shoot weight from RGB and depth images using real greenhouse crop data. Didn't place — but gained hands-on experience with real-world agricultural AI, plant phenotyping, and biomass prediction that I couldn't learn from a textbook.</p>
+      <div class="proj-metrics">
+        <span class="metric">International Competition</span><span class="metric">Real Greenhouse Data</span><span class="metric">MAE Evaluation</span>
+      </div>
+      <div class="proj-tags">
+        <span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Regression</span><span class="tag">Scikit-learn</span>
+      </div>
+      <span class="proj-link" style="cursor:default;color:var(--muted)">🏆 Wageningen University & Research</span>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <p class="proj-num">03 — Applied ML</p>
+        <div class="proj-badges"><span class="badge ai">ML</span><span class="badge open">Adelaide University</span></div>
+      </div>
+      <h3 class="proj-title">Applied Machine Learning Assignment</h3>
+      <p class="proj-desc">Performed end-to-end machine learning pipeline — dataset cleaning, augmentation, and train/test splitting. Applied accuracy metrics to evaluate model performance and experimented with multiple model configurations to identify the best-performing setup.</p>
+      <div class="proj-metrics">
+        <span class="metric">Model Comparison</span><span class="metric">Data Augmentation</span>
+      </div>
+      <div class="proj-tags">
+        <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">TensorFlow</span>
+      </div>
+      <a href="https://github.com/melmiracle7388" class="proj-link" target="_blank">⌥ View on GitHub →</a>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-header">
+        <p class="proj-num">04 — Hardware / Embedded</p>
+        <div class="proj-badges"><span class="badge hw">Hardware</span></div>
+      </div>
+      <h3 class="proj-title">Automated Bed-to-Chair System</h3>
+      <p class="proj-desc">Final year BE Mechatronics project. Designed and built an Arduino-based system to automatically convert a hospital bed into a chair for patient ease. Integrated sensors, motors, and control systems to automate motion — improving patient dignity and reducing manual effort for healthcare staff.</p>
+      <div class="proj-metrics">
+        <span class="metric">Real-world impact</span><span class="metric">Healthcare</span>
+      </div>
+      <div class="proj-tags">
+        <span class="tag">Arduino</span><span class="tag">Sensors</span><span class="tag">Control Systems</span><span class="tag">Embedded</span>
+      </div>
+      <span class="proj-link" style="cursor:default;color:var(--muted)">⚙️ Final Year Engineering Project</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CAREER FOCUS -->
+<section id="careerfocus" style="border-top:1px solid var(--border)">
+  <p class="section-label reveal">// 05 — career focus</p>
+  <h2 class="reveal">Where I'm headed</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem" class="reveal">
+
+    <div style="background:var(--surface);border:1px solid rgba(139,92,246,.3);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))"></div>
+      <p style="font-size:1.8rem;margin-bottom:.75rem">🏥</p>
+      <p style="font-weight:800;font-size:1rem;margin-bottom:.5rem">Healthcare AI Engineer</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Medical imaging, patient monitoring systems, hospital automation. My care work at Altaira gives me the human perspective most AI engineers lack.</p>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem">
+        <span class="tag">Medical Imaging</span><span class="tag">Computer Vision</span><span class="tag">Patient AI</span>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid rgba(45,212,191,.25);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),#5eead4)"></div>
+      <p style="font-size:1.8rem;margin-bottom:.75rem">🤖</p>
+      <p style="font-weight:800;font-size:1rem;margin-bottom:.5rem">AI Robotics Engineer</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Autonomous systems that perceive, decide, and act. My Mechatronics degree means I understand the full stack — from sensor to neural network to motor.</p>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem">
+        <span class="tag teal">Robotics</span><span class="tag teal">Perception</span><span class="tag teal">Embedded AI</span>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div>
+      <p style="font-size:1.8rem;margin-bottom:.75rem">🏭</p>
+      <p style="font-weight:800;font-size:1rem;margin-bottom:.5rem">Intelligent Automation</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Using AI to make industrial systems smarter — predictive maintenance, smart manufacturing, and process automation using sensor data and ML models.</p>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem">
+        <span class="tag">Automation</span><span class="tag">Predictive ML</span><span class="tag">IoT + AI</span>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+      <p style="font-size:1.8rem;margin-bottom:.75rem">🌱</p>
+      <p style="font-weight:800;font-size:1rem;margin-bottom:.5rem">AgriTech AI</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Already explored this through the Wageningen Lettuce competition. Australia is a world leader in smart farming — a natural fit combining computer vision with agriculture.</p>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem">
+        <span class="tag">Precision Farming</span><span class="tag">CV</span><span class="tag">Biomass AI</span>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:1.75rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--teal))"></div>
+      <p style="font-size:1.8rem;margin-bottom:.75rem">💻</p>
+      <p style="font-weight:800;font-size:1rem;margin-bottom:.5rem">AI Software Engineer</p>
+      <p style="font-size:.85rem;color:var(--muted);line-height:1.65">Building intelligent software — LLMs, generative AI, computer vision apps, and AI-powered tools. Interested in developing real products that bring AI capabilities to everyday users and businesses.</p>
+      <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.35rem">
+        <span class="tag">LLMs</span><span class="tag">Generative AI</span><span class="tag">AI Products</span><span class="tag">Computer Vision</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="skills">
+  <p class="section-label reveal">// 05 — skills</p>
+  <h2 class="reveal">What I work with</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <p class="sg-title">Programming</p>
+      <div class="pills"><span class="pill">Python</span><span class="pill">MATLAB</span><span class="pill">C</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">ML & AI</p>
+      <div class="pills"><span class="pill">Model Training</span><span class="pill">Classification</span><span class="pill">Regression</span><span class="pill">Neural Networks</span><span class="pill">Evaluation Metrics</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">Deep Learning</p>
+      <div class="pills"><span class="pill">CNNs</span><span class="pill">TensorFlow</span><span class="pill">Keras</span><span class="pill">Data Augmentation</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">Data Science</p>
+      <div class="pills"><span class="pill">NumPy</span><span class="pill">Pandas</span><span class="pill">Scikit-learn</span><span class="pill">Matplotlib</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">Data Processing</p>
+      <div class="pills"><span class="pill">Data Cleaning</span><span class="pill">Preprocessing</span><span class="pill">Feature Scaling</span><span class="pill">Train/Test Split</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">Tools</p>
+      <div class="pills"><span class="pill">Jupyter Notebook</span><span class="pill">VS Code</span><span class="pill">GitHub</span><span class="pill">Excel</span></div>
+    </div>
+    <div class="skill-group">
+      <p class="sg-title">Other</p>
+      <div class="pills"><span class="pill">Cybersecurity Fundamentals</span><span class="pill">Project Management</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <p class="section-label reveal">// 06 — languages</p>
+  <h2 class="reveal">I speak</h2>
+  <div class="lang-grid reveal">
+    <div class="lang-card"><span class="lang-flag">🇦🇺</span><p class="lang-name">English</p><p class="lang-level">Fluent</p></div>
+    <div class="lang-card"><span class="lang-flag">🇮🇳</span><p class="lang-name">Malayalam</p><p class="lang-level">Fluent</p></div>
+    <div class="lang-card"><span class="lang-flag">🇮🇳</span><p class="lang-name">Tamil</p><p class="lang-level">Intermediate</p></div>
+    <div class="lang-card"><span class="lang-flag">🇮🇳</span><p class="lang-name">Hindi</p><p class="lang-level">Basics</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label reveal">// 07 — contact</p>
+  <h2 class="reveal">Let's connect</h2>
+  <div class="contact-wrap reveal">
+    <p class="contact-desc">
+      Currently seeking <strong>AI/ML internships</strong> and actively planning for <strong>graduate programs starting 2027</strong> after finishing my Master's at Adelaide University in 2026. Also open to <strong>project collaborations</strong> — especially anything that connects AI with real business impact. I respond within 24 hours. Let's create something together! 🚀
+    </p>
+    <div class="contact-links">
+      <a href="mailto:melvinshaju1314@gmail.com" class="cr">
+        <span class="cr-lbl">Email</span>
+        <span class="cr-val">melvinshaju1314@gmail.com</span>
+        <span class="cr-arr">↗</span>
+      </a>
+      <a href="tel:0432220318" class="cr">
+        <span class="cr-lbl">Phone</span>
+        <span class="cr-val">0432 220 318</span>
+        <span class="cr-arr">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/melvin-shaju-9a24811b8" class="cr" target="_blank">
+        <span class="cr-lbl">LinkedIn</span>
+        <span class="cr-val">linkedin.com/in/melvin-shaju-9a24811b8</span>
+        <span class="cr-arr">↗</span>
+      </a>
+      <a href="https://github.com/melmiracle7388" class="cr" target="_blank">
+        <span class="cr-lbl">GitHub</span>
+        <span class="cr-val">github.com/melmiracle7388</span>
+        <span class="cr-arr">↗</span>
+      </a>
+      <a href="https://kaggle.com/melmiracle" class="cr" target="_blank">
+        <span class="cr-lbl">Kaggle</span>
+        <span class="cr-val">kaggle.com/melmiracle</span>
+        <span class="cr-arr">↗</span>
+      </a>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="mailto:melvinshaju1314@gmail.com" class="btn btn-primary">Say hello →</a>
+      <a href="https://linkedin.com/in/melvin-shaju-9a24811b8" class="btn btn-teal" target="_blank">Connect on LinkedIn</a>
+      <a href="https://kaggle.com/melmiracle" class="btn btn-outline" target="_blank">Kaggle Profile</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="ft">© 2026 Melvin Shaju · Blair Athol, Adelaide SA</p>
+  <p class="ft" style="color:var(--accent2)">✝️ Faith · Purpose · Technology</p>
+  <a href="#hero" class="ft-back">back to top ↑</a>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
